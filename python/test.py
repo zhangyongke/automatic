@@ -4,4 +4,7 @@
 # @Email   : zhangyongke1105@163.com
 # @File    : test.py
 # @Software : PyCharm
-print("helloworld!!!1")
+from selenium import webdriver
+
+def Login(self,name,password):
+    driver = self.driver
