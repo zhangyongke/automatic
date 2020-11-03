@@ -4,26 +4,28 @@
 # @Email   : zhangyongke1105@163.com
 # @File    : all_test.py
 # @Software : PyCharm
-import unittest, time
+import unittest
+import time
 from HTMLTestRunner import HTMLTestRunner
 
 
 def createsuite():
     testunit = unittest.TestSuite()
     # 定义测试文件查找的目录
-    test_dir = u'XXX路径'
+    test_dir = "F:\\workplace\\GitWork\\python"     # 各个测试文件
     # 定义discover方法
-    discover = unittest.defaultTestLoader.discover(test_dir,pattern='test*.py',top_level_dir=None)
+    discover = unittest.defaultTestLoader.discover(test_dir, pattern='test*.py', top_level_dir=None)
     for test_suite in discover:
         for test_case in test_suite:
             testunit.addTests(test_case)
     return testunit
 
 
-now = time.strftime("%Y-%m-$d %H_%M_%S")
+now = time.strftime("%Y-%m-%d %H_%M_%S")
 
 # 定义报告文件存放路径
-filename = '路径地址' + now + 'result.html'    # 如'E:\\workplace\\python\\result\\'
+filepath = "F:\\workplace\\GitWork\\Report\\"
+filename = filepath + now + 'result.html'
 fp = open(filename, 'wb')
 runner = HTMLTestRunner.HTMLTestRunner(fp, verbosity=1, title='XXX项目测试报告', description=u'用例执行情况')
 

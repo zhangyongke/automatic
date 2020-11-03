@@ -6,5 +6,9 @@
 # @Software : PyCharm
 from selenium import webdriver
 
-def Login(self,name,password):
-    driver = self.driver
+
+def greet_user(username):
+    print("Hello, " + username.title() + "!")
+
+
+greet_user('jess')
