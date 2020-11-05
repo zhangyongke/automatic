@@ -70,7 +70,72 @@ print(musician)
 musician = get_formatterd_name('john', 'hooker', 'lee')
 print(musician)
 
+
 # 返回字典
+def build_person(first_name, last_name, age=''):
+    """返回一个字典，其中包含一个人的信息"""
+    person = {'first': first_name, 'last': last_name}
+    if age:
+        person['age'] = age
+    return person
+
+
+musician = build_person('jimi', 'hendrix', age=17)
+print(musician)
+
+
+# 结合使用函数和while循环
+def get_formatterd_name(first_name, last_name, middle_name=''):
+    """返回整个的姓名"""
+    if middle_name:
+        full_name = first_name + ' ' + middle_name + ' ' + last_name
+    else:
+        full_name = first_name + ' ' + last_name
+    return full_name.title()
+
+
+# 这是一个循环
+# kaifa 
+
+
+# 向函数传递列表
+def greet_users(names):
+    """向列表中的每位用户都发出简单的问候"""
+    for name in names:
+        msg = "Hello," + name.title() + "!"
+        print(msg)
+
+
+usernames = ['hannah', 'try', 'margot']
+greet_users(usernames)
+
+
+# 传递任意数量的实参
+def make_pizza(*toppings):   # 形参名*toppings中的星号让python创建一个名为toppings的空元组，并将收到的所有值都封装到这个元组中
+    """概述要制作的披萨"""
+    print("\nMake a pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
+
+
+make_pizza('pepperoni')
+make_pizza('mushrooms', 'green peppers', 'extra cheese')
+
+
+# 使用任意数量的关键字实参
+def build_profile(first, last, **user_info):       # 形参**user_info中的两个星号让python创建一个名为user_info的空字典，并将收到的所有名称-值对都封装到这个字典中
+    """创建一个字典，其中包含我们知道的有关用户的一切"""
+    profile = {}
+    profile['first_name'] = first
+    profile['last_name'] = last
+    for key, value in user_info.items():
+        profile[key] = value
+    return profile
+
+
+user_profile = build_profile('albert', 'einstein', location='princeton', field='physics')
+print(user_profile)
+
 
 
 
