@@ -23,3 +23,14 @@ with open(filepath1) as file_object1:
 
 for line1 in lines:
     print(line1.rstrip())
+
+# 使用文件的内容：将文件读取到内存中后，就可以在任何方式使用这些数据了，
+filename = 'F:\\workplace\\GitWork\\python\\文件\\pi_digits.txt'
+with open(filename) as file_object:
+    lines = file_object.readlines()
+
+pi_string = ''
+for line in lines:
+    pi_string += line.rstrip()
+print(pi_string)
+print(len(pi_string))
