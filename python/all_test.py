@@ -12,7 +12,7 @@ from HTMLTestRunner import HTMLTestRunner
 def createsuite():
     testunit = unittest.TestSuite()
     # 定义测试文件查找的目录
-    test_dir = "F:\\workplace\\GitWork\\python"     # 各个测试文件
+    test_dir = "F:\\workplace\\GitWork\\python"     # 各个测试文件存放路径
     # 定义discover方法
     discover = unittest.defaultTestLoader.discover(test_dir, pattern='test*.py', top_level_dir=None)
     for test_suite in discover:

@@ -1,7 +1,7 @@
 # _*_coding:utf-8_*_
-# @Time:       2020/11/6  10:36
-# @Author:     xmsme  
-# @File:       文件测试.py  
+# @Time:   2020/11/6  10:36
+# @Author: xmsme
+# @File:   文件测试.py
 # @Software:   PyCharm
 
 filepath = "F:\\workplace\\GitWork\\python\\文件\\pi_digits.txt"
@@ -34,3 +34,11 @@ for line in lines:
     pi_string += line.rstrip()
 print(pi_string)
 print(len(pi_string))
+# 在变量pi_string存储的字符串中，包含原来位于每行左边的空格，为删除这些空格，可使用strip()而不是rstrip方法
+# 调用open()打开文件模式时，可以指定读取模式('r'),写入模式('w'),附加模式('a')或者能读取和写入文件的模式('r+').如果你省略了模式实参，Python将以默认的只读模式打
+# 开文件。如果你要写入的文件不存在，函数open()将自动创建它。然而，以写入（'w' ）模式打开文件时千万要小心，因为如果指定的文件已经存在，Python将在返回文件对象前清空
+# 该文件。
+
+filename = 'F:\\workplace\\GitWork\\python\\文件\\pi_digits1.txt'
+with open(filename, 'w') as file_object:
+    file_object.write("One One One.")
