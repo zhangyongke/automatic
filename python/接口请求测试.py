@@ -8,26 +8,77 @@
 
 import requests
 import json
-base_url = "http://10.0.9.28:8088/client"
-tokenurl = "/api/getToken"      # 请求token的地址
-# 请求报文加密
-encrypturl = "http://10.0.252.220:8800/getRequestParam"    # 加密请求地址
+
+base_url = "http://10.0.9.28:8088/client"                # 服务器请求地址
+encrypt_url = "http://10.0.252.220:8800/getRequestParam"  # 加密请求地址
+decrypt_url = "http://10.0.252.220:8800/getDecryptData"   # 解密请求地址
+
+token_url = base_url + "/api/getToken"                           # 请求token_url
+qytb_url = base_url + "/api/upload/enterprises"                  # 企业填报url
+rzxqxxhc_url = base_url + "/api/upload/financingRequirements"    # 融资需求信息回传url
+rztjhc_url = base_url + "/api/upload/financingStatistics"        # 融资统计回传url
+jrjghc_url = base_url + "/api/upload/financialInstitutions"      # 金融机构信息回传url
+jrcphc_url = base_url + "/api/upload/financialProducts"          # 金融产品信息回传url
+zcxxhc_url = base_url + "/api/upload/policies"                   # 政策信息回传url
+xyfwjghc_url = base_url + "/api/upload/creditServiceAgencies"    # 信用机构信息回传url
+xycphc_url = base_url + "/api/upload/creditProductStatistics"    # 信用产品信息回传url
+
 headers = {"Content-Type": "application/json; charset=UTF-8"}
+
+
+# 请求加密方法
+def encrypt_data(body):
+        encrypt_res = requests.post(url=encrypt_url, data=json.dumps(body), headers=headers)
+        return encrypt_res.text
+
+
+# 解密方法
+def decrypt_data(body):
+        decrypt_res = requests.post(url=decrypt_url, data=body, headers=headers)
+        return list(eval(decrypt_res.text).values())[0]  # 可以通过eval函数转换成dict格式，获取token的值
+
+
+# gettoken请求
 data = {"appId": "831e85e26740492ca73819cd9a3591e5",
         "appKey": "shanghaishi",
         "appSecret": "831e85e26740492ca73819cd9a3591e51604892182069"
         }
-encrytres = requests.post(url=encrypturl, data=json.dumps(data), headers=headers)
-print(encrytres.text)
+# 请求token前先对用户信息数据加密
+request_body = encrypt_data(data)
 
-# 请求获取token
-url = base_url + tokenurl
-headers = {"Content-Type": "application/json; charset=UTF-8"}
-gettokenres = requests.post(url=url, data=encrytres.text, headers=headers)
-print(gettokenres.text)
+# 进行token请求
+response_body = requests.post(url=token_url, data=request_body, headers=headers)
 
-# 解密请求地址
-decrypturl = "http://10.0.252.220:8800/getDecryptData"  # 解密url
-headers = {"Content-Type": "application/json; charset=UTF-8"}
-decryptres = requests.post(url=decrypturl, data=gettokenres.text, headers=headers)
-print(decryptres.text)
+# 返回数据进行解密
+token = decrypt_data(response_body)
+# print(token)
+
+
+# # 企业填报接口
+request_data = [{
+    "uniscId": "91310000695772014M",
+    "enterpriseName": "上海正帆科技股份有限公司",
+    "address": "上海市沈河区万柳塘路38号",
+    "industry": "1",
+    "province": "上海市",
+    "city": "上海市",
+    "area": "闵行区",
+    "registeredCapital": 120,
+    "businessScope": "日用塑料制品制造;塑料零件制造;其他未列明金属制品制造(不含须经前置审批许可的项目);其他金属制日用品制造;",
+    "operatingTimeLimitType": 2,
+    "operatingTimeLimitDateBegin": "2020-11-09 10:21:15",
+    "operatingTimeLimitDateEnd": "9999-12-31 10:21:15",
+    "approvalDate": "2019-09-30 10:21:15",
+    "settlingTime": "2020-11-10 10:21:15",
+    "externalSystemId": "11112"
+}]
+
+# EncryptData(request_data)
+ba = eval(encrypt_data(request_data))      # 转换成字典格式，eval函数可以实现list、dict、tuple与str之间的转化
+ba['token'] = token      # 请求中添加token信息
+# print(json.dumps(ba))
+
+# 请求填报信息
+qytbsj_res = requests.post(url=qytb_url, data=json.dumps(ba), headers=headers)    # json.dumps把请求转换成json格式
+print(qytbsj_res.text)
+
