@@ -9,16 +9,16 @@ import time
 from HTMLTestRunner import HTMLTestRunner
 
 
-def createsuite():
-    testunit = unittest.TestSuite()
+def create_suite():
+    test_unit = unittest.TestSuite()
     # 定义测试文件查找的目录
     test_dir = "F:\\workplace\\GitWork\\python"     # 各个测试文件存放路径
     # 定义discover方法
     discover = unittest.defaultTestLoader.discover(test_dir, pattern='test*.py', top_level_dir=None)
     for test_suite in discover:
         for test_case in test_suite:
-            testunit.addTests(test_case)
-    return testunit
+            test_unit.addTests(test_case)
+    return test_unit
 
 
 now = time.strftime("%Y-%m-%d %H_%M_%S")
@@ -30,6 +30,6 @@ fp = open(filename, 'wb')
 runner = HTMLTestRunner.HTMLTestRunner(fp, verbosity=1, title='XXX项目测试报告', description=u'用例执行情况')
 
 if __name__ == '__main__':
-    alltestnames = createsuite()
-    runner.run(alltestnames)
+    all_test_names = create_suite()
+    runner.run(all_test_names)
     fp.close()

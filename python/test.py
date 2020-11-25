@@ -4,7 +4,6 @@
 # @Email   : zhangyongke1105@163.com
 # @File    : test.py
 # @Software : PyCharm
-from selenium import webdriver
 
 
 # 在列表之间移动元素
@@ -30,7 +29,7 @@ def describe_pet(animal_type, pet_name):
     print("My " + animal_type + "'s name is " + pet_name.title() + ".")
 
 
-describe_pet(animal_type='hamster', pet_name='hunry')
+describe_pet(animal_type='hamster', pet_name='hungry')
 
 
 # 函数默认值
@@ -45,18 +44,18 @@ describe_pet('willie')
 
 
 # 函数返回值
-# def get_formatterd_name(first_name, last_name):
+# def get_format_name(first_name, last_name):
 #     """返回完整的姓名"""
 #     full_name = first_name + ' ' + last_name
 #     return full_name.title()
 #
 #
-# musician = get_formatterd_name('jimi', 'hendrix')
+# musician = get_format_name('jimi', 'hendrix')
 # print(musician)
 
 
 # 让实参变成可选的
-def get_formatterd_name(first_name, last_name, middle_name=''):
+def get_format_name(first_name, last_name, middle_name=''):
     """返回整个的姓名"""
     if middle_name:
         full_name = first_name + ' ' + middle_name + ' ' + last_name
@@ -65,9 +64,9 @@ def get_formatterd_name(first_name, last_name, middle_name=''):
     return full_name.title()
 
 
-musician = get_formatterd_name('jimi', 'hendrix')
+musician = get_format_name('jimi', 'hendrix')
 print(musician)
-musician = get_formatterd_name('john', 'hooker', 'lee')
+musician = get_format_name('john', 'hooker', 'lee')
 print(musician)
 
 
@@ -80,12 +79,12 @@ def build_person(first_name, last_name, age=''):
     return person
 
 
-musician = build_person('jimi', 'hendrix', age=17)
+musician = build_person('jimi', 'hendrix', age='17')
 print(musician)
 
 
 # 结合使用函数和while循环
-def get_formatterd_name(first_name, last_name, middle_name=''):
+def get_format_name(first_name, last_name, middle_name=''):
     """返回整个的姓名"""
     if middle_name:
         full_name = first_name + ' ' + middle_name + ' ' + last_name
@@ -95,9 +94,6 @@ def get_formatterd_name(first_name, last_name, middle_name=''):
 
 
 # 这是一个循环
-# kaifa 
-
-
 # 向函数传递列表
 def greet_users(names):
     """向列表中的每位用户都发出简单的问候"""
@@ -125,9 +121,7 @@ make_pizza('mushrooms', 'green peppers', 'extra cheese')
 # 使用任意数量的关键字实参
 def build_profile(first, last, **user_info):       # 形参**user_info中的两个星号让python创建一个名为user_info的空字典，并将收到的所有名称-值对都封装到这个字典中
     """创建一个字典，其中包含我们知道的有关用户的一切"""
-    profile = {}
-    profile['first_name'] = first
-    profile['last_name'] = last
+    profile = {'first_name': first, 'last_name': last}
     for key, value in user_info.items():
         profile[key] = value
     return profile
@@ -135,8 +129,3 @@ def build_profile(first, last, **user_info):       # 形参**user_info中的两�
 
 user_profile = build_profile('albert', 'einstein', location='princeton', field='physics')
 print(user_profile)
-
-
-
-
-
