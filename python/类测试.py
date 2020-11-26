@@ -6,7 +6,7 @@
 
 
 # 创建类,类中的函数叫方法
-class Dog():
+class Dog:
     """一次模拟小狗的简单尝试"""
 
     def __init__(self, name, age):
@@ -25,7 +25,7 @@ class Dog():
 
 
 # 使用类和实列
-class Car():
+class Car:
     """一次模拟描述汽车的属性"""
     def __init__(self, make, model, year):
         self.make = make
@@ -54,11 +54,9 @@ class Car():
         self.odometer_reading += miles
 
 
-mycar = Car('audi', 'A4', '2014')
-print(mycar.get_descriptive_name())
-mycar.read_odometer()
-mycar.update_odometer(23)
-mycar.increment_odometer(10)
-mycar.read_odometer()
-
-
+my_car = Car('audi', 'A4', '2014')
+print(my_car.get_descriptive_name())
+my_car.read_odometer()
+my_car.update_odometer(23)
+my_car.increment_odometer(10)
+my_car.read_odometer()

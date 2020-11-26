@@ -52,6 +52,8 @@ def swipe_right():
     driver.swipe(x1, y1, x2, y1, 500)
 
 # 初始化信息
+
+
 desired_caps = {}
 desired_caps["platformName"] = "Android"
 desired_caps["platformVersion"] = "7.1.2"

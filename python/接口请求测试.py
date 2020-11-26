@@ -9,33 +9,33 @@
 import requests
 import json
 
-base_url = "http://10.0.9.28:8088/client"                # 服务器请求地址
+base_url = "http://10.0.9.28:8088/client"  # 服务器请求地址
 encrypt_url = "http://10.0.252.220:8800/getRequestParam"  # 加密请求地址
-decrypt_url = "http://10.0.252.220:8800/getDecryptData"   # 解密请求地址
+decrypt_url = "http://10.0.252.220:8800/getDecryptData"  # 解密请求地址
 
-token_url = base_url + "/api/getToken"                           # 请求token_url
-qytb_url = base_url + "/api/upload/enterprises"                  # 企业填报url
-rzxqxxhc_url = base_url + "/api/upload/financingRequirements"    # 融资需求信息回传url
-rztjhc_url = base_url + "/api/upload/financingStatistics"        # 融资统计回传url
-jrjghc_url = base_url + "/api/upload/financialInstitutions"      # 金融机构信息回传url
-jrcphc_url = base_url + "/api/upload/financialProducts"          # 金融产品信息回传url
-zcxxhc_url = base_url + "/api/upload/policies"                   # 政策信息回传url
-xyfwjghc_url = base_url + "/api/upload/creditServiceAgencies"    # 信用机构信息回传url
-xycphc_url = base_url + "/api/upload/creditProductStatistics"    # 信用产品信息回传url
+token_url = base_url + "/api/getToken"  # 请求token_url
+qytb_url = base_url + "/api/upload/enterprises"  # 企业填报url
+rzxqxxhc_url = base_url + "/api/upload/financingRequirements"  # 融资需求信息回传url
+rztjhc_url = base_url + "/api/upload/financingStatistics"  # 融资统计回传url
+jrjghc_url = base_url + "/api/upload/financialInstitutions"  # 金融机构信息回传url
+jrcphc_url = base_url + "/api/upload/financialProducts"  # 金融产品信息回传url
+zcxxhc_url = base_url + "/api/upload/policies"  # 政策信息回传url
+xyfwjghc_url = base_url + "/api/upload/creditServiceAgencies"  # 信用机构信息回传url
+xycphc_url = base_url + "/api/upload/creditProductStatistics"  # 信用产品信息回传url
 
 headers = {"Content-Type": "application/json; charset=UTF-8"}
 
 
 # 请求加密方法
 def encrypt_data(body):
-        encrypt_res = requests.post(url=encrypt_url, data=json.dumps(body), headers=headers)
-        return encrypt_res.text
+    encrypt_res = requests.post(url=encrypt_url, data=json.dumps(body), headers=headers)
+    return encrypt_res.text
 
 
 # 解密方法
 def decrypt_data(body):
-        decrypt_res = requests.post(url=decrypt_url, data=body, headers=headers)
-        return list(eval(decrypt_res.text).values())[0]  # 可以通过eval函数转换成dict格式，获取token的值
+    decrypt_res = requests.post(url=decrypt_url, data=body, headers=headers)
+    return list(eval(decrypt_res.text).values())[0]  # 可以通过eval函数转换成dict格式，获取token的值
 
 
 # gettoken请求
@@ -74,11 +74,10 @@ request_data = [{
 }]
 
 # EncryptData(request_data)
-ba = eval(encrypt_data(request_data))      # 转换成字典格式，eval函数可以实现list、dict、tuple与str之间的转化
-ba['token'] = token      # 请求中添加token信息
+ba = eval(encrypt_data(request_data))  # 转换成字典格式，eval函数可以实现list、dict、tuple与str之间的转化
+ba['token'] = token  # 请求中添加token信息
 # print(json.dumps(ba))
 
 # 请求填报信息
-qytbsj_res = requests.post(url=qytb_url, data=json.dumps(ba), headers=headers)    # json.dumps把请求转换成json格式
+qytbsj_res = requests.post(url=qytb_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式
 print(qytbsj_res.text)
-

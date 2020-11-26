@@ -4,7 +4,9 @@
 # @Email : zhangyongke1105@163.com
 # @File : 异常测试.py
 # @Software: PyCharm
-
+import json
+# 使用try:
+# except Exception as e方式对异常对象进行检查，这样做将让不是从Exception派生而来的为数不多的异常成为漏网之鱼
 # try-except-else 代码块的工作原理大致如下： Python尝试执行try代码块中的代码；只有可能引发异常的代码才需要放在try 语句中。有时候有一些仅在try 代码块成功
 # 执行时才需要运行的代码；这些代码应放在else 代码块中。except代码块告诉Python，如果它尝试运行try 代码块中的代码时引发了指定的异常，该怎么办。
 print("Give me two numbers, and I'll divide them.")
@@ -34,7 +36,7 @@ except FileNotFoundError:
 
 # 使用json.dump()和json.load()
 # 第一个程序将使用json.dump()来存储这组数字，而第二个程序将使用json.load() 。函数json.dump()接受两个实参：要存储的数据以及可用于存储数据的文件对象。
-import json
+
 numbers = [2, 3, 5, 7, 11, 13]
 filename = 'numbers.json'
 with open(filename, 'w') as f_obj:
@@ -46,7 +48,6 @@ with open(filename) as f_obj:
     numbers = json.load(f_obj)    # 使用函数json.load()加载存储在numbers.json中的信息，并将其存储到变量numbers 中
 print(numbers)
 
-import json
 # 如果以前存储了用户名， 就加载它
 # 否则， 就提示用户输入用户名并存储它
 filename = 'username.json'
@@ -60,4 +61,3 @@ except FileNotFoundError:
         print("We'll remember you when you come back, " + username + "!")
 else:
     print("Welcome back, " + username + "!")
-
