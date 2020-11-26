@@ -5,7 +5,7 @@
 # @Software:   PyCharm
 
 
-class Car():
+class Car:
     """一次模拟描述汽车的属性"""
     def __init__(self, make, model, year):
         self.make = make
