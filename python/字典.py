@@ -23,10 +23,7 @@ people = {
 }
 
 # 电话号码和地址的描述性标签，供打印输出时使用
-labels = {
-    'phone': 'phone number',
-    'addr': 'address'
-}
+labels = {'phone': 'phone number', 'addr': 'address'}
 
 name = input('Name: ')
 

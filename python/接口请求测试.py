@@ -15,19 +15,23 @@ decrypt_url = "http://10.0.252.220:8800/getDecryptData"  # 解密请求地址
 
 token_url = base_url + "/api/getToken"  # 请求token_url
 qytb_url = base_url + "/api/upload/enterprises"  # 企业填报url
-rzxqxxhc_url = base_url + "/api/upload/financingRequirements"  # 融资需求信息回传url
-rztjhc_url = base_url + "/api/upload/financingStatistics"  # 融资统计回传url
-jrjghc_url = base_url + "/api/upload/financialInstitutions"  # 金融机构信息回传url
-jrcphc_url = base_url + "/api/upload/financialProducts"  # 金融产品信息回传url
-zcxxhc_url = base_url + "/api/upload/policies"  # 政策信息回传url
-xyfwjghc_url = base_url + "/api/upload/creditServiceAgencies"  # 信用机构信息回传url
-xycphc_url = base_url + "/api/upload/creditProductStatistics"  # 信用产品信息回传url
+rzxqxx_url = base_url + "/api/upload/financingRequirements"  # 融资需求信息回传url
+rztj_url = base_url + "/api/upload/financingStatistics"  # 融资统计回传url
+jrjg_url = base_url + "/api/upload/financialInstitutions"  # 金融机构信息回传url
+jrcp_url = base_url + "/api/upload/financialProducts"  # 金融产品信息回传url
+zcxx_url = base_url + "/api/upload/policies"  # 政策信息回传url
+xyfwjg_url = base_url + "/api/upload/creditServiceAgencies"  # 信用机构信息回传url
+xycp_url = base_url + "/api/upload/creditProductStatistics"  # 信用产品信息回传url
 
 headers = {"Content-Type": "application/json; charset=UTF-8"}
 
 
 # 请求加密方法
 def encrypt_data(body):
+    # json.dumps()是将一个Python数据类型列表进行json格式的编码(可以理解为：将字典形式的数据转化为字符串）
+    # json.loads()是将json格式数据转换为字典(可以理解为：将字符串形式的数据转化为字典)
+    # json.dump()函数的使用，将json信息写进文件
+    # json.load()函数的使用，将读取json信息
     encrypt_res = requests.post(url=encrypt_url, data=json.dumps(body), headers=headers)
     return encrypt_res.text
 
@@ -79,5 +83,5 @@ ba['token'] = token  # 请求中添加token信息
 # print(json.dumps(ba))
 
 # 请求填报信息
-qytbsj_res = requests.post(url=qytb_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式
+qytbsj_res = requests.post(url=qytb_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式的编码
 print(qytbsj_res.text)

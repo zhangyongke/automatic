@@ -20,7 +20,13 @@
 # print("\nThe following users have been confirmed:")
 # for confirmed_user in confirmed_users:
 #     print(confirmed_user.title())
-#
+
+# 列表反转,reversed返回一个迭代器，可以使用list将返回的对象转换为列表
+x = [1, 2, 3]
+print(list(reversed(x)))
+# 元组和列表之间可以互相转换，使用tuple()转换成元组，使用list()转换成列表
+
+
 #
 # # 函数关键字实参
 # def describe_pet(animal_type, pet_name):
@@ -119,7 +125,7 @@
 #
 #
 # # 使用任意数量的关键字实参
-# def build_profile(first, last, **user_info):       # 形参**user_info中的两个星号让python创建一个名为user_info的空字典，并将收到的所有名称-值对都封装到这个字典中
+# def build_profile(first, last, **user_info):     # 形参**user_info中的两个星号让python创建一个名为user_info的空字典，并将收到的所有名称-值对都封装到这个字典中
 #     """创建一个字典，其中包含我们知道的有关用户的一切"""
 #     profile = {'first_name': first, 'last_name': last}
 #     for key, value in user_info.items():
@@ -129,3 +135,15 @@
 #
 # user_profile = build_profile('albert', 'einstein', location='princeton', field='physics')
 # print(user_profile)
+
+# pow(x, y)该函数表示，执行x的y次方，如下
+# a = pow(2, 3)
+# b = 10 + pow(2, 3*5)/3.0
+# print(a, b)
+#
+# # abs计算绝对值，round将浮点数圆整为与之最接近的整数,2//3表示向下取整数，如下
+# c = abs(-10)
+# d = round(2/3)
+# e = 2//3
+# print(c, d, e)
+
