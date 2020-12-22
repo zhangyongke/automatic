@@ -13,7 +13,7 @@ while k < 2:
     now_time = time.strftime('%H_%M')
     if now_time == '21_00':
         print("开始执行脚本")
-        os.chdir("/Volumes/Ubuntu/Gitworkplace/workplace-Git/python/")    # 切换到脚本所在目录
+        os.chdir("/Volumes/Ubuntu/Gitworkplace/workplace-Git/python_project/")    # 切换到脚本所在目录
         os.system('Python all_test.py')    # 执行脚本
         print("脚本运行完成退出")
         break
