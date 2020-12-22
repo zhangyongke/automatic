@@ -12,7 +12,7 @@ from HTMLTestRunner import HTMLTestRunner
 def create_suite():
     test_unit = unittest.TestSuite()
     # 定义测试文件查找的目录
-    test_dir = "F:\\workplace\\GitWork\\python"     # 各个测试文件存放路径
+    test_dir = "/python"  # 各个测试文件存放路径
     # 定义discover方法，查找需要执行测试的文件
     discover = unittest.defaultTestLoader.discover(test_dir, pattern='test*.py', top_level_dir=None)
     for test_suite in discover:
@@ -25,7 +25,7 @@ now = time.strftime("%Y-%m-%d %H_%M_%S")
 
 
 # 定义报告文件存放路径
-filepath = "F:\\workplace\\GitWork\\Report\\"
+filepath = "/Report\\"
 filename = filepath + now + 'result.html'
 fp = open(filename, 'wb')
 runner = HTMLTestRunner.HTMLTestRunner(fp, verbosity=1, title='XXX项目测试报告', description=u'用例执行情况')
