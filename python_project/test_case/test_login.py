@@ -8,6 +8,7 @@ from selenium import webdriver
 import unittest
 import time
 from python_project.test_case.public import login
+from python_project.test_case.public import file_read
 
 
 class TestLogin(unittest.TestCase):
@@ -18,68 +19,75 @@ class TestLogin(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
 
-    # 用户正常登陆系统
-    def test_login(self):
-        """用户输入正确的用户名和密码，可正常登陆"""
-        driver = self.driver
-        driver.get(self.base_url)
-        driver.maximize_window()
-        # 调用登陆函数
-        login.login(self, "admin", "admin123")
-        # 获取断言
-        iframe = driver.find_element_by_name("iframe0")
-        driver.switch_to.frame(iframe)
-        time.sleep(3)
-        text = driver.find_element_by_xpath("/html/body/div[1]/div").text
-        self.assertEqual(text, "欢迎使用全国中小企业融资综合信用服务平台", "用户登陆失败")
-        # 调用退出函数
-        login.logout(self)
-
-    # 用户名，密码为空
-    def test_null(self):
-        """用户名和密码输入为空，用户登陆失败，系统进行提示。"""
-        driver = self.driver
-        driver.get(self.base_url)
-        driver.maximize_window()
-        # 调用登陆函数
-        login.login(self, '', '')
-        text = driver.find_element_by_id("username-error").text
-        self.assertEqual(text, u"请输入您的用户名", "用户名错误")
-
-    # 输入用户名，密码为空
-    def test_password_null(self):
-        """输入正确的用户名，密码输入为空，用户登陆失败，系统进行提示。"""
-        driver = self.driver
-        driver.get(self.base_url)
-        driver.maximize_window()
-        # 调用登陆函数
-        login.login(self, "admin", "")
-        text = driver.find_element_by_id("password-error").text
-        self.assertEqual(text, "请输入您的密码", "密码错误")
-        # # 测试跳过用例数据，使用self.skipTest()跳过测试用例的执行
-        # self.skipTest(u"测试跳过该测试用例")
-
-    # 用户名为空，输入密码
-    def test_user_null(self):
-        """用户名输入为空，密码输入正确，用户登陆失败，系统进行提示。"""
-        driver = self.driver
-        driver.get(self.base_url)
-        driver.maximize_window()
-        # 调用登陆函数
-        login.login(self, "", "admin123")
-        text = driver.find_element_by_id("username-error").text
-        self.assertEqual(text, u"请输入您的用户名", "用户名错误")
-
-    # 用户密码错误
-    # def test_error(self):
+    # # 用户正常登陆系统
+    # def test_login(self):
+    #     """用户输入正确的用户名和密码，可正常登陆"""
     #     driver = self.driver
     #     driver.get(self.base_url)
     #     driver.maximize_window()
     #     # 调用登陆函数
-    #     login.login(self, "admin123", "admin123")
-    #     text = driver.find_element_by_xpath("/html/body/div[2]").text
-    #     print(text)
-    #     # self.assertEqual(text, u"请输入您的用户名", "用户名错误")
+    #     login.login(self, "admin", "admin123")
+    #     # 获取断言
+    #     iframe = driver.find_element_by_name("iframe0")
+    #     driver.switch_to.frame(iframe)
+    #     time.sleep(3)
+    #     text = driver.find_element_by_xpath("/html/body/div[1]/div").text
+    #     self.assertEqual(text, "欢迎使用全国中小企业融资综合信用服务平台", "用户登陆失败")
+    #     # 调用退出函数
+    #     login.logout(self)
+    #
+    # # 用户名，密码为空
+    # def test_null(self):
+    #     """用户名和密码输入为空，用户登陆失败，系统进行提示。"""
+    #     driver = self.driver
+    #     driver.get(self.base_url)
+    #     driver.maximize_window()
+    #     username = file_read.user_info(4)[0]
+    #     password = file_read.user_info(4)[1]
+    #     # 调用登陆函数
+    #     login.login(self, username, password)
+    #     text = driver.find_element_by_id("username-error").text
+    #     self.assertEqual(text, u"请输入您的用户名", "用户名错误")
+    #
+    # # 输入用户名，密码为空
+    # def test_password_null(self):
+    #     """输入正确的用户名，密码输入为空，用户登陆失败，系统进行提示。"""
+    #     driver = self.driver
+    #     driver.get(self.base_url)
+    #     driver.maximize_window()
+    #     username = file_read.user_info(5)[0]
+    #     password = file_read.user_info(5)[1]
+    #     # 调用登陆函数
+    #     login.login(self, username, password)
+    #     text = driver.find_element_by_id("password-error").text
+    #     self.assertEqual(text, "请输入您的密码", "密码错误")
+    #     # 测试跳过用例数据，使用self.skipTest()跳过测试用例的执行
+    #     # self.skipTest(u"测试跳过该测试用例")
+    #
+    # # 用户名为空，输入密码
+    # def test_user_null(self):
+    #     """用户名输入为空，密码输入正确，用户登陆失败，系统进行提示。"""
+    #     driver = self.driver
+    #     driver.get(self.base_url)
+    #     driver.maximize_window()
+    #     username = file_read.user_info(6)[0]
+    #     password = file_read.user_info(6)[1]
+    #     # 调用登陆函数
+    #     login.login(self, username, password)
+    #     text = driver.find_element_by_id("username-error").text
+    #     self.assertEqual(text, u"请输入您的用户名", "用户名错误")
+
+    # 用户密码错误
+    def test_error(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        driver.maximize_window()
+        # 调用登陆函数
+        login.login(self, "admin123", "admin123")
+        alert = driver.switch_to.alert
+        text = alert.text
+        print(text)
+        # self.assertEqual(text, u"请输入您的用户名", "用户名错误")
 
     def tearDown(self) -> None:
         self.driver.quit()
