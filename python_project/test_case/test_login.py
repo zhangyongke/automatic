@@ -88,6 +88,7 @@ class TestLogin(unittest.TestCase):
         text = alert.text
         print(text)
         # self.assertEqual(text, u"请输入您的用户名", "用户名错误")
+        self.skipTest(u"测试跳过该测试用例")
 
     def tearDown(self) -> None:
         self.driver.quit()
