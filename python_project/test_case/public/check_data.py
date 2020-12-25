@@ -8,7 +8,7 @@
 import time
 
 
-def check_date(self, data):
+def check_date(self):
     driver = self.driver
     try:
         menu_table = driver.find_element_by_xpath("//*[@id='bootstrap-table']/tbody")
@@ -16,15 +16,11 @@ def check_date(self, data):
         print(f)
     else:
         rows = menu_table.find_elements_by_tag_name('tr')
+        # 获取第一页的条数
         result = len(rows)
         text = driver.find_element_by_xpath("//*[@id='bootstrap-table']/tbody/tr/td").text
         if result == 1 and text == "没有找到匹配的记录":
             print("查询记录结果为空")
         else:
-            # 模糊查询，判断输入的查询条件，是否在查询结果列表中。
-            name = driver.find_element_by_xpath("//*[@id='bootstrap-table']/tbody/tr/td[1]").text
-            if data in name:
-                print(u"条件在查询结果列表中！！")
-            print(u"当前查询记录为：%d" % result)
-        # driver.switch_to.parent_frame()
-        time.sleep(3)
+            print(u"当前页记录条数为：%d" % result)
+        time.sleep(2)

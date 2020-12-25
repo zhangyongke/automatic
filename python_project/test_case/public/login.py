@@ -9,12 +9,16 @@ import time
 
 def login(self, username, password):
     driver = self.driver
-    driver.find_element_by_name("username").clear()
-    driver.find_element_by_name("username").send_keys(username)
-    driver.find_element_by_name("password").clear()
-    driver.find_element_by_name("password").send_keys(password)
-    driver.find_element_by_id("btnSubmit").click()
-    time.sleep(5)
+    try:
+        driver.find_element_by_name("username").clear()
+    except BaseException as e:
+        print(e)
+    else:
+        driver.find_element_by_name("username").send_keys(username)
+        driver.find_element_by_name("password").clear()
+        driver.find_element_by_name("password").send_keys(password)
+        driver.find_element_by_id("btnSubmit").click()
+        time.sleep(2)
 
 
 def logout(self):

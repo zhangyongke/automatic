@@ -29,7 +29,7 @@ runner = BeautifulReport(all_test_names)
 report_dir = 'F:\\workplace\\GitWork\\python_project\\Report\\'
 
 if __name__ == '__main__':
-    runner.report(u"用户登陆模块", now+"_BeautifulReport", report_dir=report_dir)
+    runner.report(u"基础平台功能验证", now+"_BeautifulReport", report_dir=report_dir)
 
 
 # # 使用HTMLTestReport报告
