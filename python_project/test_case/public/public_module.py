@@ -9,7 +9,7 @@ import os
 
 
 def open_business_white_list_import(self):
-    """打开企业白名单导入菜单栏"""
+    """打开企业白名单菜单栏"""
     driver = self.driver
     try:
         driver.find_element_by_link_text(u"企业白名单").click()
@@ -61,3 +61,18 @@ def export_work(self):
             continue
     print("最新下载的文件为：", newest_file[0])
     driver.switch_to.parent_frame()
+
+
+def open_business_library(self):
+    """打开中小企业共享库"""
+    driver = self.driver
+    try:
+        driver.find_element_by_link_text(u"中小企业共享库").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"企业档案").click()
+        time.sleep(2)
+        iframe = driver.find_element_by_name("iframe3")
+        driver.switch_to.frame(iframe)
+        time.sleep(2)
+    except Exception as e:
+        print(e)

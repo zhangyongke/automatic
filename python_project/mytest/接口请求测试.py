@@ -14,15 +14,10 @@ encrypt_url = "http://10.0.252.220:8800/getRequestParam"  # 加密请求地址
 decrypt_url = "http://10.0.252.220:8800/getDecryptData"  # 解密请求地址
 
 token_url = base_url + "/api/getToken"  # 请求token_url
-qytb_url = base_url + "/api/upload/enterprises"  # 企业填报url
-rzxqxx_url = base_url + "/api/upload/financingRequirements"  # 融资需求信息回传url
-rztj_url = base_url + "/api/upload/financingStatistics"  # 融资统计回传url
-jrjg_url = base_url + "/api/upload/financialInstitutions"  # 金融机构信息回传url
-jrcp_url = base_url + "/api/upload/financialProducts"  # 金融产品信息回传url
-zcxx_url = base_url + "/api/upload/policies"  # 政策信息回传url
-xyfwjg_url = base_url + "/api/upload/creditServiceAgencies"  # 信用机构信息回传url
-xycp_url = base_url + "/api/upload/creditProductStatistics"  # 信用产品信息回传url
 
+other_url = "/api/creditInquiry/administrativeLicensing"
+
+request_url = base_url + other_url
 headers = {"Content-Type": "application/json; charset=UTF-8"}
 
 
@@ -43,9 +38,9 @@ def decrypt_data(body):
 
 
 # gettoken请求
-data = {"appId": "831e85e26740492ca73819cd9a3591e5",
-        "appKey": "shanghaishi",
-        "appSecret": "831e85e26740492ca73819cd9a3591e51604892182069"
+data = {"appId": "cea72a86f5a948f0a8551d028c11a6ad",
+        "appKey": "anhuihuangshan",
+        "appSecret": "cea72a86f5a948f0a8551d028c11a6ad1609326968161"
         }
 # 请求token前先对用户信息数据加密
 request_body = encrypt_data(data)
@@ -55,33 +50,166 @@ response_body = requests.post(url=token_url, data=request_body, headers=headers)
 
 # 返回数据进行解密
 token = decrypt_data(response_body)
-# print(token)
-
+publicKey = '0429C374822DF3B6EE94B47AB0D35F692C10F3545DA1EB5D2C28C24CC6BFD407DA3C6843C47FD3510DA2D43D39E0F4BEEC106CDFFF54D03EAA98F05BB5FE8A26BE'
 
 # # 企业填报接口
-request_data = [{
-    "uniscId": "91310000695772014M",
-    "enterpriseName": "上海正帆科技股份有限公司",
-    "address": "上海市沈河区万柳塘路38号",
-    "industry": "1",
-    "province": "上海市",
-    "city": "上海市",
-    "area": "闵行区",
-    "registeredCapital": 120,
-    "businessScope": "日用塑料制品制造;塑料零件制造;其他未列明金属制品制造(不含须经前置审批许可的项目);其他金属制日用品制造;",
-    "operatingTimeLimitType": 2,
-    "operatingTimeLimitDateBegin": "2020-11-09 10:21:15",
-    "operatingTimeLimitDateEnd": "9999-12-31 10:21:15",
-    "approvalDate": "2019-09-30 10:21:15",
-    "settlingTime": "2020-11-10 10:21:15",
-    "externalSystemId": "11112"
-}]
+# request_data = [{
+#     "uniscId": "91310000695772014M",
+#     "enterpriseName": "上海正帆科技股份有限公司",
+#     "address": "上海市沈河区万柳塘路38号",
+#     "industry": "1",
+#     "province": "上海市",
+#     "city": "上海市",
+#     "area": "闵行区",
+#     "registeredCapital": 120,
+#     "businessScope": "日用塑料制品制造;塑料零件制造;其他未列明金属制品制造(不含须经前置审批许可的项目);其他金属制日用品制造;",
+#     "operatingTimeLimitType": 2,
+#     "operatingTimeLimitDateBegin": "2020-11-09 10:21:15",
+#     "operatingTimeLimitDateEnd": "9999-12-31 10:21:15",
+#     "approvalDate": "2019-09-30 10:21:15",
+#     "settlingTime": "2020-11-10 10:21:15",
+#     "externalSystemId": "11112"
+# }]
+#
+# # EncryptData(request_data)
+# ba = eval(encrypt_data(request_data))  # 转换成字典格式，eval函数可以实现list、dict、tuple与str之间的转化
+# ba['token'] = token  # 请求中添加token信息
+# # print(json.dumps(ba))
 
-# EncryptData(request_data)
-ba = eval(encrypt_data(request_data))  # 转换成字典格式，eval函数可以实现list、dict、tuple与str之间的转化
+# # 请求填报信息
+# qytbsj_res = requests.post(url=request_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式的编码
+# print(qytbsj_res.text)
+
+
+# 请求信用中国-公开信息汇总查询接口
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求信用中国-注册登记信息查询
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求信用中国-行政许可
+request_data = {
+    "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\"}",
+    "publicKey": publicKey
+}
+
+# 请求信用中国-行政处罚
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求信用中国-失信惩戒查询接口
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求信用中国-授信激励查询接口
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\"}",
+#     "publicKey": publicKey
+# }
+
+# 生产环境授权id:007d86c0589e4311aae71cc429537b55
+# 测试环境授权id:619b0c39687f4b4189edb3e954c1ecb6
+
+# 请求授权查询-法人纳税接口
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\","
+#                    "\"licenseId\": \"619b0c39687f4b4189edb3e954c1ecb6\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求授权查询-法人纳税接口
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\","
+#                    "\"licenseId\": \"619b0c39687f4b4189edb3e954c1ecb6\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求授权查询-法人社保缴费信息查询
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\","
+#                    "\"licenseId\": \"619b0c39687f4b4189edb3e954c1ecb6\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求授权-法人社保欠费查询
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\","
+#                    "\"licenseId\": \"619b0c39687f4b4189edb3e954c1ecb6\"}",
+#     "publicKey": publicKey
+# }
+
+# 请求授权-法人公积金缴存信息查询
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\","
+#                    "\"licenseId\": \"619b0c39687f4b4189edb3e954c1ecb6\"}",
+# #     "publicKey": publicKey
+# }
+
+# 请求授权-公共资源交易记录查询
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\",\"year\":\"2020\","
+#                    "\"type\":\"00\",\"pageIndex\":\"1\",\"pageSize\":\"10\","
+#                    "\"licenseId\": \"619b0c39687f4b4189edb3e954c1ecb6\"}",
+#     "publicKey": publicKey
+# }
+
+ba = request_data
 ba['token'] = token  # 请求中添加token信息
-# print(json.dumps(ba))
 
-# 请求填报信息
-qytbsj_res = requests.post(url=qytb_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式的编码
-print(qytbsj_res.text)
+# # 融资统计回传接口
+# request_data = [{
+#     "province": "安徽省",
+#     "city": "黄山市",
+#     "area": "",
+#     "areaCode": "341000",
+#     "registeredEnterpriseNum": 3000,
+#     "creditEnterpriseNum": 3800,
+#     "loanEnterpriseNum": 3500,
+#     "creditLoanEnterpriseNum": 3300,
+#     "financingNeedsEnterpriseNum": 3850,
+#     "creditAmount": 20211,
+#     "creditNum": 465,
+#     "loanAmount": 18000,
+#     "loanNum": 430,
+#     "creditLoanAmount": 6112,
+#     "creditLoanNum": 410,
+#     "financingNeedsAmount": 20111,
+#     "financingNeedsNum": 480,
+#     "dockingNum": 30,
+#     "overdueNum": 10,
+#     "averageLendingRate": 5.8,
+#     "fullBusinessProcessAveragePeriod": 5,
+#     "creditAveragePeriod": "5",
+#     "loanAveragePeriod": "5",
+#     "creditLoanAveragePeriod": "10",
+#     "settledInFinancialInstitutionNum": 15,  # //入驻金融机构数
+#     "financialProductsNum": 25,               # //发布金融产品数
+#     "nearlyYearLoanAmount": 1580.86,        # //近一年放款金额
+#     "nearlyYearLoanNum": 1300,                  # //近一年放款笔数
+#     "nearlyYearLoanEnterpriseNum": 652,       # //近一年放款企业数
+#     "nearlyYearCreditLoanAmount": 1255.96,  # //近一年信用放款金额
+#     "nearlyYearCreditLoanNum": 1280,           # //近一年信用放款笔数
+#     "nearlyYearCreditLoanEnterpriseNum": 642,  # //近一年信用放款企业数
+#     "nearlyYearFinancingNeedsAmount": 1200.89,   # //近一年融资需求金额
+#     "nearlyYearFinancingNeedsNum": 10,       # //近一年融资需求笔数
+#     "statisticsBeginTime": "2019-11-11 10:21:15",  # //统计开始时间
+#     "statisticsEndTime": "2020-12-30 14:21:15",    # //统计截止时间
+#     "externalSystemId": "111111"                    # 外部系统id
+# }]
+#
+# ba = eval(encrypt_data(request_data))  # 转换成字典格式，eval函数可以实现list、dict、tuple与str之间的转化
+# ba['token'] = token  # 请求中添加token信息
+
+# 信用中国接口-查询
+return_res = requests.post(url=request_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式的编码
+print(return_res.text)

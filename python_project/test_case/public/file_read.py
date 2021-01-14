@@ -47,14 +47,11 @@ def user_info(row):
 
 def open_fie(filepath, sheet_name):
     """打开文件操作"""
-    try:
-        wb = openpyxl.load_workbook(filepath)
-        sheet = wb[sheet_name]
-        rows = sheet.max_row
-        cows = sheet.max_column
-        return sheet
-    except FileNotFoundError:
-        print("请检查文件路径或sheet页名称！！！！")
+    wb = openpyxl.load_workbook(filepath)
+    sheet = wb[sheet_name]
+    rows = sheet.max_row
+    cows = sheet.max_column
+    return sheet
 
 
 # a = user_info(4)
