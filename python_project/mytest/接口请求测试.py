@@ -20,6 +20,8 @@ other_url = "/api/creditInquiry/administrativeLicensing"
 request_url = base_url + other_url
 headers = {"Content-Type": "application/json; charset=UTF-8"}
 
+publicKey = '0429C374822DF3B6EE94B47AB0D35F692C10F3545DA1EB5D2C28C24CC6BFD407DA3C6843C47FD3510DA2D43D39E0F4BEEC106CDFFF54D03EAA98F05BB5FE8A26BE'
+
 
 # 请求加密方法
 def encrypt_data(body):
@@ -37,20 +39,40 @@ def decrypt_data(body):
     return list(eval(decrypt_res.text).values())[0]  # 可以通过eval函数转换成dict格式，获取token的值
 
 
-# gettoken请求
-data = {"appId": "cea72a86f5a948f0a8551d028c11a6ad",
-        "appKey": "anhuihuangshan",
-        "appSecret": "cea72a86f5a948f0a8551d028c11a6ad1609326968161"
-        }
-# 请求token前先对用户信息数据加密
-request_body = encrypt_data(data)
+# 获取token请求
+def get_token():
+    data = {"appId": "cea72a86f5a948f0a8551d028c11a6ad",
+            "appKey": "anhuihuangshan",
+            "appSecret": "cea72a86f5a948f0a8551d028c11a6ad1609326968161"
+            }
+    # 请求token前先对用户信息数据加密
+    request_body = encrypt_data(data)
+    # 进行token请求
+    response_body = requests.post(url=token_url, data=request_body, headers=headers)
+    json_date = json.loads(response_body.text)    # 将字符串格式转换为字典格式，其中response_body.text表示接口请求的返回结果信息
+    if json_date['success']:
+        # 返回数据进行解密
+        token = decrypt_data(response_body)
+        return token
+    else:
+        print("token请求失败，请确认用户信息")
 
-# 进行token请求
-response_body = requests.post(url=token_url, data=request_body, headers=headers)
 
-# 返回数据进行解密
-token = decrypt_data(response_body)
-publicKey = '0429C374822DF3B6EE94B47AB0D35F692C10F3545DA1EB5D2C28C24CC6BFD407DA3C6843C47FD3510DA2D43D39E0F4BEEC106CDFFF54D03EAA98F05BB5FE8A26BE'
+a = get_token()
+# print(a)
+
+
+# 公开信息汇总查询接口
+def public_information():
+    request_data = {"requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\"}", "publicKey": publicKey, 'token': a}
+    return_res = requests.post(url=request_url, data=json.dumps(request_data), headers=headers)  # 把请求转换成json格式的编码
+    return return_res.text
+
+
+b = public_information()
+print(b)
+
+
 
 # # 企业填报接口
 # request_data = [{
@@ -94,10 +116,10 @@ publicKey = '0429C374822DF3B6EE94B47AB0D35F692C10F3545DA1EB5D2C28C24CC6BFD407DA3
 # }
 
 # 请求信用中国-行政许可
-request_data = {
-    "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\"}",
-    "publicKey": publicKey
-}
+# request_data = {
+#     "requestData": "{\"enterpriseName\": \"厦门中小在线信息服务有限公司\",\"uniscId\": \"91350200761733778F\"}",
+#     "publicKey": publicKey
+# }
 
 # 请求信用中国-行政处罚
 # request_data = {
@@ -118,7 +140,7 @@ request_data = {
 # }
 
 # 生产环境授权id:007d86c0589e4311aae71cc429537b55
-# 测试环境授权id:619b0c39687f4b4189edb3e954c1ecb6
+# 测试环境授权id:d677e088dcfa4565b26aa89c95c68cfa
 
 # 请求授权查询-法人纳税接口
 # request_data = {
@@ -163,8 +185,8 @@ request_data = {
 #     "publicKey": publicKey
 # }
 
-ba = request_data
-ba['token'] = token  # 请求中添加token信息
+# ba = request_data
+# ba['token'] = token  # 请求中添加token信息
 
 # # 融资统计回传接口
 # request_data = [{
@@ -211,5 +233,5 @@ ba['token'] = token  # 请求中添加token信息
 # ba['token'] = token  # 请求中添加token信息
 
 # 信用中国接口-查询
-return_res = requests.post(url=request_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式的编码
-print(return_res.text)
+# return_res = requests.post(url=request_url, data=json.dumps(ba), headers=headers)  # json.dumps把请求转换成json格式的编码
+# print(return_res.text)
