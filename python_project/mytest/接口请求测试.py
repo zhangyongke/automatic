@@ -59,7 +59,6 @@ def get_token():
 
 
 a = get_token()
-# print(a)
 
 
 # 公开信息汇总查询接口
@@ -71,7 +70,6 @@ def public_information():
 
 b = public_information()
 print(b)
-
 
 
 # # 企业填报接口
