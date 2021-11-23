@@ -6,6 +6,11 @@
 # @Software: PyCharm
 
 # 字符串方法
+# 返回字符串首字母大写  title()方法
+a = 'this is an apple'
+b = a.title()
+print(b)
+
 # 合并序列  join是一个非常重要的字符串方法，其作用与split相反，用于合并序列的元素
 sep = '+'
 seq = ['1', '2', '3', '4', '5']
@@ -21,10 +26,6 @@ a = 'Trondheim Hammer Dance'
 b = a.lower()
 print(b)
 
-# 返回字符串首字母大写  title()方法
-a = 'this is an apple'
-b = a.title()
-print(b)
 
 # 将指定子串都替换为另一个字符串，并返回替换后的结果 replace()方法
 a = 'This is a test'
@@ -44,7 +45,8 @@ a = 'Using the default'
 b = a.split()
 print(b)
 
-# 将字符串开头和末尾的空白(不包括中间的空白)删除，并返回删除后的结果 strip()
+# 将字符串开头和末尾的空白(不包括中间的空白)删除，并返回删除后的结果 strip()，用rstrip()方法可以把右边的空格去掉，用lstrip()方法
+# 可以把左边的空格去掉。
 a = ' internal whitespace is kept '
 b = a.strip()
 print(b)

@@ -5,6 +5,7 @@
 # @File : test_login.py
 # @Software: PyCharm
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 import unittest
 import time
 from python_project.test_case.public import login
@@ -28,10 +29,12 @@ class TestLogin(unittest.TestCase):
         # 调用登陆函数
         login.login(self, "admin", "admin123")
         # 获取断言
-        iframe = driver.find_element_by_name("iframe0")
+        # iframe = driver.find_element_by_name("iframe0")
+        iframe = driver.find_element(By.name, 'iframe0')
         driver.switch_to.frame(iframe)
         time.sleep(3)
-        text = driver.find_element_by_xpath("/html/body/div[1]/div").text
+        # text = driver.find_element_by_xpath("/html/body/div[1]/div").text
+        text = driver.find_element(By.xpath, "/html/body/div[1]/div").text
         self.assertEqual(text, "欢迎使用全国中小企业融资综合信用服务平台", "用户登陆失败")
         # 调用退出函数
         login.logout(self)

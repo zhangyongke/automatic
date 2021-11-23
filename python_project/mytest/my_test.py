@@ -39,3 +39,27 @@
 # d = round(2/3)
 # e = 2//3
 # print(c, d, e)
+
+
+x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+y = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+     'x', 'y', 'z']
+z = ['~', '`', '!', '@', '#', '$', '%', '^', '&', '*']
+# a = input("请输入企业名称：\n")
+# for i in range(0, len(a)):
+#     # print(type(a[i]))
+#     if a[i] in str(x) or a[i].lower() in y or a[i] in z:
+#         print("企业名称输入不能包含数字和字母！请重新输入！")
+#         break
+flag = True
+while flag:
+    a = input("请输入企业名称：\n")
+    for i in range(0, len(a)):
+        # print(type(a[i]))
+        if a[i] in str(x) or a[i].lower() in y or a[i] in z:
+            print("企业名称输入不能包含数字和字母！请重新输入！")
+            flag = False
+            break
+
+
+
