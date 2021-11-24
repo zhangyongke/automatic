@@ -1,14 +1,14 @@
 # _*_coding:utf-8_*_
 # @Time:       2020/11/5  11:20
 # @Author:     xmsme  
-# @File:       类测试.py  
+# @File:       ch4_类.py
 # @Software:   PyCharm
 
 
 # 创建类,类中的函数叫方法
 class Dog:
     """一次模拟小狗的简单尝试"""
-
+    # 定义构造方法
     def __init__(self, name, age):
         # 为何必须在方法定义中包含形参self 呢？ 因为Python调用这个__init__() 方法来创建Dog 实例时， 将自动传入实参self 。
         # 每个与类相关联的方法调用都自动传递实参self ，它是一个指向实例本身的引用，让实例能够访问类中的属性和方法。
@@ -54,6 +54,7 @@ class Car:
         self.odometer_reading += miles
 
 
+# 初始化对象
 my_car = Car('audi', 'A4', '2014')
 print(my_car.get_descriptive_name())
 my_car.read_odometer()

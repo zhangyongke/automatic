@@ -1,7 +1,7 @@
 # _*_coding:utf-8_*_
 # @Time:   2020/11/6  10:36
 # @Author: xmsme
-# @File:   文件测试.py
+# @File:   ch3_文件.py
 # @Software:   PyCharm
 
 filepath = "/python_project/test_data/pi_digits.txt"

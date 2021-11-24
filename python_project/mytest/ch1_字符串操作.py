@@ -2,7 +2,7 @@
 # @Time : 2020/11/26 17:16
 # @Author : zyk
 # @Email : zhangyongke1105@163.com
-# @File : 字符串操作.py
+# @File : ch1_字符串操作.py
 # @Software: PyCharm
 
 # 字符串方法
