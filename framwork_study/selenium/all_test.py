@@ -6,7 +6,6 @@
 # @Software : PyCharm
 import unittest
 import time
-# from TestRunner import HTMLTestRunner
 from BeautifulReport import BeautifulReport
 
 
