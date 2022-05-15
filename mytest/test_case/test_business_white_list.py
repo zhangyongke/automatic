@@ -6,8 +6,8 @@
 # @Software: PyCharm
 from selenium import webdriver
 import unittest
-from framwork_study.selenium.test_case.public import public_module, check_data, file_read
-from framwork_study.selenium.test_case.public import login
+from mytest.test_case.public import public_module, check_data, file_read
+from mytest.test_case.public import login
 import time
 
 

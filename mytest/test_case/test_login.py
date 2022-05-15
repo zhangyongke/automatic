@@ -8,8 +8,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import unittest
 import time
-from framwork_study.selenium.test_case.public import login
-from framwork_study.selenium.test_case.public import file_read
+from mytest.test_case.public import login
+from mytest.test_case.public import file_read
 
 
 class TestLogin(unittest.TestCase):
