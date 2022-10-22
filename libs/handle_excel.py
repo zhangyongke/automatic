@@ -54,10 +54,10 @@ def get_excel_data(file_path, sheet_name, case_name):
             exp_data = work_sheet.cell(row_index, 8).value
             # [(req_body1,exp_data1),(req_body2,exp_data2)]
             res_list.append((req_body, exp_data))
-        row_index += 1
+            row_index += 1
     return res_list  # 返回列表里面包含元组
 
 
 if __name__ == '__main__':
-    res = get_excel_data('../data/exam.xls', '登录模块', '')
+    res = get_excel_data('../data/exam.xls', '登录模块', 'login')
     print(res)
