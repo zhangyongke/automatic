@@ -21,7 +21,8 @@ class Login:
         # 4、发送请求
         resp = requests.post(url, json=payload)
         # 5、打印响应数据
-        return resp.text  # 返回响应数据--字符串类型
+        # return resp.text  # 返回响应数据--字符串类型
+        return resp.json()  # 返回响应数据--字典类型
 
     def logout(self):
         pass

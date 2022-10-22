@@ -5,6 +5,7 @@
 # @File      ：handle_excel.PY
 # @Software  ：PyCharm
 import xlrd
+import json
 """
 功能需求：获取excel文件指定数据
 入参：
@@ -53,7 +54,7 @@ def get_excel_data(file_path, sheet_name, case_name):
             req_body = work_sheet.cell(row_index, 6).value  # cell(行编号，列编号)
             exp_data = work_sheet.cell(row_index, 8).value
             # [(req_body1,exp_data1),(req_body2,exp_data2)]
-            res_list.append((req_body, exp_data))
+            res_list.append((json.loads(req_body), json.loads(exp_data)))
             row_index += 1
     return res_list  # 返回列表里面包含元组
 
